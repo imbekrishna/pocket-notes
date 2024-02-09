@@ -1,5 +1,5 @@
 import { groups, notes } from './data';
-
+import { LS_GROUP_KEY } from './constants';
 /* data rendering helpers */
 export const getGroupInitials = (name) => {
   const wordsArray = name.split(' ');
@@ -32,6 +32,14 @@ export const dateTimeFormatter = (timestamp) => {
 export const getGroups = () => groups;
 export const getGroupById = (groupId) => {
   return groups.find((group) => group.id === parseInt(groupId));
+};
+
+export const addGroup = (groupObj) => {
+  const storageGroups = JSON.parse(localStorage.getItem(LS_GROUP_KEY)) ?? [];
+
+  storageGroups.push(groupObj);
+
+  localStorage.setItem(LS_GROUP_KEY, JSON.stringify(storageGroups));
 };
 
 /* For notes */

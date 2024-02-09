@@ -1,8 +1,14 @@
 import { Link } from 'react-router-dom';
 import { groups } from '../utils/data';
 import GroupLogo from './GroupLogo';
+import { useState } from 'react';
+import AddGroup from '../pages/AddGroup';
 
 const Sidebar = () => {
+  const [modalShowing, setModalShowing] = useState(false);
+  const handleClick = () => {
+    setModalShowing((prev) => !prev);
+  };
   return (
     <main className="sidebar">
       <h1 className="sidebar__header">Pocket Notes</h1>
@@ -18,7 +24,15 @@ const Sidebar = () => {
           ))}
         </ul>
       </div>
-      <button className="btn-fab">+</button>
+      <button onClick={handleClick} className="btn-fab">
+        +
+      </button>
+      <div
+        className={`add_group__container ${modalShowing && 'isVisible'}`}
+        onClick={handleClick}
+      >
+        <AddGroup closeModal={handleClick} />
+      </div>
     </main>
   );
 };
