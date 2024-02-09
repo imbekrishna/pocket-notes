@@ -31,9 +31,9 @@
 
 @media (min-width: 800px) {
   :root {
-    --fs-h1: 4.5rem;
-    --fs-h2: 3.75rem;
-    --fs-h3: 1.5rem;
+    --fs-h1: 3rem;
+    --fs-h2: 1.9rem;
+    --fs-h3: 1.4rem;
     --fs-body: 1.125rem;
   }
 }
@@ -137,6 +137,7 @@ button {
   border: 2px solid #cccccc;
   border-radius: 1em;
   text-indent: 0.5em;
+  flex: 1;
 }
 
 .add_group__colors {
@@ -176,13 +177,41 @@ button {
 .add_group__btn {
   background-color: var(--clr-accent);
   color: var(--clr-light);
-  padding: 0.6em 1em;
+  padding: 0.4em 1em;
   width: 60%;
   border: none;
   border-radius: 0.5em;
   align-self: center;
   margin-top: 0.5em;
   font-size: var(--fs-h3);
+}
+
+@media screen and (min-width: 800px) {
+  .add_group__card {
+    max-width: 700px;
+    max-height: 350px;
+    padding: 1.5em;
+  }
+
+  .add_group__edit > input {
+    padding: 0.4em;
+  }
+
+  .group__color {
+    width: 45px;
+  }
+
+  .colors__container {
+    column-gap: 1em;
+  }
+
+  .add_group__btn {
+    width: fit-content;
+    align-self: flex-end;
+    margin-top: 0;
+    padding: 0.4em 2em;
+    font-size: inherit;
+  }
 }
 
 /* Sidebar styles */
@@ -192,6 +221,7 @@ button {
   flex-direction: column;
   align-items: center;
   height: 100vh;
+  background-color: #a9f3ed;
 }
 
 .sidebar__header {
@@ -219,15 +249,21 @@ button {
   display: flex;
   align-items: center;
   column-gap: 1em;
+  overflow: hidden;
 }
 
 .grp__item + .grp__item {
-  margin-top: 1.5em;
+  margin-top: 1em;
+}
+
+.grp__name {
+  flex-shrink: 0;
 }
 
 .grp__logo {
   width: 60px;
   height: 60px;
+  aspect-ratio: 1;
   color: var(--clr-light);
   background-color: var(--clr-accent);
 
@@ -264,6 +300,12 @@ button {
   border-radius: 50%;
 
   box-shadow: var(--bs);
+}
+
+@media screen and (min-width: 800px) {
+  .sidebar {
+    max-width: 400px;
+  }
 }
 
 /* Group notes styles */

@@ -33,7 +33,7 @@ const storedGroups = JSON.parse(localStorage.getItem(LS_GROUP_KEY)) ?? [];
 const storedNotes = JSON.parse(localStorage.getItem(LS_NOTES_KEY)) ?? {};
 
 export const getGroups = () => {
-  return storedGroups;
+  return storedGroups.sort((a, b) => b.createdAt - a.createdAt);
 };
 export const getGroupById = (groupId) => {
   return storedGroups.find((group) => group.id === groupId);
