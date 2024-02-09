@@ -303,6 +303,7 @@ button {
   background-color: var(--clr-light);
   padding: 1em;
   border-radius: 0.5em;
+  box-shadow: var(--bs);
 }
 
 .note__item + .note__item {
@@ -333,10 +334,20 @@ button {
   padding: 0.7em;
   border: none;
   border-radius: 0.5em;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.753) inset;
 }
 
 .note__add__btn {
   position: absolute;
   right: 7%;
   top: 45%;
+  filter: drop-shadow(0.25em 0.25em 2px rgba(0, 0, 0, 0.25));
+  transition: all 200ms;
+  cursor: pointer;
+}
+
+.note__add__btn:hover,
+.note__add__btn:active {
+  filter: drop-shadow(0.35em 0.35em 1px rgba(0, 0, 0, 0.5));
+  transform: scale(1.2);
 }

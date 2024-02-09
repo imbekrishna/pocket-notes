@@ -1,16 +1,36 @@
 import { Link } from 'react-router-dom';
+
 import arrowBack from '../assets/arrow-back.svg';
 import sendIcon from '../assets/send.svg';
 import GroupLogo from '../components/GroupLogo';
 import NoteCard from '../components/NoteCard';
-import { notes } from '../utils/data';
 
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getGroupById } from '../utils/helpers';
+import {
+  addNoteToGroup,
+  getGroupById,
+  getNotesByGroupId,
+} from '../utils/helpers';
 
 const GroupNotes = () => {
   const params = useParams();
   const group = getGroupById(params.id);
+  const allNotes = getNotesByGroupId(params.id);
+
+  const [newNote, setNewNote] = useState('');
+
+  const handleChange = (e) => {
+    setNewNote(e.target.value);
+  };
+
+  const saveNote = () => {
+    addNoteToGroup(params.id, newNote);
+    setNewNote('');
+  };
+
+  console.log(allNotes);
+
   // TODO: Can we use useState?
   return (
     <section className="notes__container">
@@ -24,18 +44,25 @@ const GroupNotes = () => {
         </div>
       </header>
       <ul className="notes__list">
-        {notes.map((note) => (
+        {allNotes.map((note) => (
           <NoteCard key={note.id} {...note} />
         ))}
       </ul>
       <footer className="note__editor">
-        <textarea name="note" id="note" placeholder="Enter your text here..." />
+        <textarea
+          name="note"
+          id="note"
+          placeholder="Enter your text here..."
+          value={newNote}
+          onChange={handleChange}
+        />
         <img
+          src={sendIcon}
           role="button"
           className="note__add__btn"
           width="25"
           height="25"
-          src={sendIcon}
+          onClick={saveNote}
         />
       </footer>
     </section>

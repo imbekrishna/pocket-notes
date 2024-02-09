@@ -1,14 +1,14 @@
-import { notes } from './data';
-import { LS_GROUP_KEY } from './constants';
+import { nanoid } from 'nanoid';
+import { LS_GROUP_KEY, LS_NOTES_KEY } from './constants';
 /* data rendering helpers */
 export const getGroupInitials = (name) => {
-  const wordsArray = name.split(' ');
-  const initals =
+  const wordsArray = name.trim().split(' ');
+  const initials =
     wordsArray.length === 1
       ? wordsArray[0][0]
       : wordsArray[0][0] + wordsArray[1][0];
 
-  return initals.toUpperCase();
+  return initials.toUpperCase();
 };
 
 export const dateTimeFormatter = (timestamp) => {
@@ -29,24 +29,40 @@ export const dateTimeFormatter = (timestamp) => {
 /* Data fetching helpers */
 
 /* For groups */
-const storageGroups = JSON.parse(localStorage.getItem(LS_GROUP_KEY)) ?? [];
+const storedGroups = JSON.parse(localStorage.getItem(LS_GROUP_KEY)) ?? [];
+const storedNotes = JSON.parse(localStorage.getItem(LS_NOTES_KEY)) ?? {};
 
 export const getGroups = () => {
-  return storageGroups;
+  return storedGroups;
 };
 export const getGroupById = (groupId) => {
-  return storageGroups.find((group) => group.id === parseInt(groupId));
+  return storedGroups.find((group) => group.id === groupId);
 };
 
 export const addGroup = (groupObj) => {
-  const group = { ...groupObj, id: Date.now() };
-  storageGroups.push(group);
+  const group = { ...groupObj, id: nanoid(10), createdAt: Date.now() };
+  storedGroups.push(group);
 
-  localStorage.setItem(LS_GROUP_KEY, JSON.stringify(storageGroups));
+  localStorage.setItem(LS_GROUP_KEY, JSON.stringify(storedGroups));
 };
 
 /* For notes */
-export const getNotes = () => notes;
-export const getNoteById = (noteId) => {
-  return notes.find((note) => note.id === parseInt(noteId));
+export const getNotes = () => storedNotes;
+export const getNotesByGroupId = (groupId) => {
+  return storedNotes[groupId]?.sort((a, b) => b.createdAt - a.createdAt) ?? [];
+};
+// TODO: Implement
+// export const getNoteById = (noteId) => {
+//   return notes.find((note) => note.id === noteId);
+// };
+
+export const addNoteToGroup = (groupId, note) => {
+  const noteObj = { id: nanoid(10), note, createdAt: Date.now() };
+  if (Object.prototype.hasOwnProperty.call(storedNotes, groupId)) {
+    storedNotes[groupId].push(noteObj);
+  } else {
+    storedNotes[groupId] = [noteObj];
+  }
+  // storedNotes[groupId].push(note);
+  localStorage.setItem(LS_NOTES_KEY, JSON.stringify(storedNotes));
 };
