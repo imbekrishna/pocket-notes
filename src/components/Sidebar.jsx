@@ -1,5 +1,6 @@
-import { groups } from "../utils/data";
-import { getGroupInitials } from "../utils/helpers";
+import { Link } from 'react-router-dom';
+import { groups } from '../utils/data';
+import GroupLogo from './GroupLogo';
 
 const Sidebar = () => {
   return (
@@ -9,8 +10,10 @@ const Sidebar = () => {
         <ul className="grps__container">
           {groups.map((group) => (
             <li key={group.id} className="grp__item">
-              <span className="grp__logo">{getGroupInitials(group.name)}</span>
-              <span className="grp__name">{group.name}</span>
+              <Link to={`/group/${group.id}`} className="grp__item__link">
+                <GroupLogo name={group.name} />
+                <span className="grp__name">{group.name}</span>
+              </Link>
             </li>
           ))}
         </ul>
@@ -18,6 +21,6 @@ const Sidebar = () => {
       <button className="btn-fab">+</button>
     </main>
   );
-}
+};
 
-export default Sidebar
+export default Sidebar;
