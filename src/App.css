@@ -1,0 +1,143 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* Customer properties */
+
+:root {
+  --ff-primary: 'Raleway', sans-serif;
+  --ff-secondary: 'Noto Sans', sans-serif;
+
+  --fw-reg: 300;
+  --fw-bold: 600;
+
+  --clr-light: #fff;
+  --clr-dark: #0F0F0F;
+  --cls-secondary: #dae5f5;
+  --clr-accent: #16008b;
+
+  --fs-h1: 2rem;
+  --fs-h2: 1.75rem;
+  --fs-h3: 1.25rem;
+  --fs-body: 1rem;
+
+  --bs: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.25),
+    0.125em 0.125em 0.25em rgba(0, 0, 0, 0.15);
+}
+
+@media (min-width: 800px) {
+  :root {
+    --fs-h1: 4.5rem;
+    --fs-h2: 3.75rem;
+    --fs-h3: 1.5rem;
+    --fs-body: 1.125rem;
+  }
+}
+
+/* General styles */
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.123);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+  height: 5px;
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.116);
+  background-color: #c2bfbf;
+}
+
+body {
+  background-color: var(--clr-light);
+  color: var(--clr-dark);
+  font-family: var(--ff-primary);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+}
+
+/* Sidebar styles */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  height: 100vh;
+}
+
+.sidebar__header {
+  font-size: var(--fs-h1);
+  text-align: center;
+}
+
+.sidebar__grps {
+  flex: 1;
+  overflow: auto;
+  padding: 1em;
+  width: 90%;
+}
+
+.grps__container {
+  list-style: none;
+}
+
+/* list item styles */
+
+.grp__item {
+  display: flex;
+  align-items: center;
+  column-gap: 1em;
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.05em;
+}
+
+.grp__item + .grp__item {
+  margin-top: 1.5em;
+}
+
+.grp__logo {
+  width: 60px;
+  height: 60px;
+  color: var(--clr-light);
+  background-color: var(--clr-accent);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+}
+
+/* Sidebar floating action button style */
+
+.btn-fab {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 70px;
+  height: 70px;
+  color: var(--clr-light);
+  font-size: 70px;
+  text-align: center;
+  background-color: var(--clr-accent);
+
+  border: none;
+  border-radius: 50%;
+
+  box-shadow: var(--bs);
+}
