@@ -1,3 +1,6 @@
+import { groups, notes } from './data';
+
+/* data rendering helpers */
 export const getGroupInitials = (name) => {
   const wordsArray = name.split(' ');
   const initals =
@@ -21,4 +24,18 @@ export const dateTimeFormatter = (timestamp) => {
   }).format(new Date(timestamp));
 
   return { date, time };
+};
+
+/* Data fetching helpers */
+
+/* For groups */
+export const getGroups = () => groups;
+export const getGroupById = (groupId) => {
+  return groups.find((group) => group.id === parseInt(groupId));
+};
+
+/* For notes */
+export const getNotes = () => notes;
+export const getNoteById = (noteId) => {
+  return notes.find((note) => note.id === parseInt(noteId));
 };
