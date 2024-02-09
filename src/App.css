@@ -56,6 +56,13 @@
   background-color: #c2bfbf;
 }
 
+:disabled {
+  color: gray;
+  cursor: not-allowed;
+  filter: grayscale(50%);
+  opacity: 50%;
+}
+
 body {
   background-color: var(--clr-light);
   color: var(--clr-dark);
@@ -346,13 +353,6 @@ button {
   top: 45%;
   filter: drop-shadow(0.25em 0.25em 2px rgba(0, 0, 0, 0.25));
   transition: all 200ms;
-  cursor: pointer;
-}
-
-.note__add__btn:disabled {
-  color: gray;
-  cursor: not-allowed;
-  filter: grayscale(50%);
 }
 
 .note__add__btn:hover:enabled,

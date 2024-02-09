@@ -15,6 +15,8 @@ const AddGroup = (props) => {
     setGroup((prev) => ({ ...prev, [name]: value }));
   };
 
+  const isInvalid = group.name.length < 3 || group.color.length <= 0;
+
   const handleSetColor = (color) => {
     setColors((prevColors) =>
       prevColors.map((i) =>
@@ -26,6 +28,7 @@ const AddGroup = (props) => {
   };
 
   const handleSubmit = () => {
+    if (isInvalid) return;
     addGroup(group);
     props.closeModal();
     setColors(COLOR_MAP);
@@ -61,7 +64,11 @@ const AddGroup = (props) => {
           ))}
         </div>
       </div>
-      <button onClick={handleSubmit} className="add_group__btn">
+      <button
+        disabled={isInvalid}
+        onClick={handleSubmit}
+        className="add_group__btn"
+      >
         Create
       </button>
     </div>
