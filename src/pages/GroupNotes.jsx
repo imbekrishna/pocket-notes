@@ -19,12 +19,17 @@ const GroupNotes = () => {
   const allNotes = getNotesByGroupId(params.id);
 
   const [newNote, setNewNote] = useState('');
+  const isDisabled = newNote.length <= 0;
+
+  console.log(newNote, newNote.length, isDisabled);
 
   const handleChange = (e) => {
     setNewNote(e.target.value);
   };
 
   const saveNote = () => {
+    if (newNote.length <= 0) return;
+
     addNoteToGroup(params.id, newNote);
     setNewNote('');
   };
@@ -56,14 +61,13 @@ const GroupNotes = () => {
           value={newNote}
           onChange={handleChange}
         />
-        <img
-          src={sendIcon}
-          role="button"
-          className="note__add__btn"
-          width="25"
-          height="25"
+        <button
           onClick={saveNote}
-        />
+          className="note__add__btn"
+          disabled={isDisabled}
+        >
+          <img src={sendIcon} role="button" width="25" height="25" />
+        </button>
       </footer>
     </section>
   );

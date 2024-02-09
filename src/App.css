@@ -335,9 +335,12 @@ button {
   border: none;
   border-radius: 0.5em;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.753) inset;
+  letter-spacing: 0.03em;
 }
 
 .note__add__btn {
+  border: none;
+  background-color: transparent;
   position: absolute;
   right: 7%;
   top: 45%;
@@ -346,8 +349,14 @@ button {
   cursor: pointer;
 }
 
-.note__add__btn:hover,
-.note__add__btn:active {
+.note__add__btn:disabled {
+  color: gray;
+  cursor: not-allowed;
+  filter: grayscale(50%);
+}
+
+.note__add__btn:hover:enabled,
+.note__add__btn:active:enabled {
   filter: drop-shadow(0.35em 0.35em 1px rgba(0, 0, 0, 0.5));
   transform: scale(1.2);
 }
