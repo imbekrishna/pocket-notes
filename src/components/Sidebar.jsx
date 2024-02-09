@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
-import { groups } from '../utils/data';
+// import { groups } from '../utils/data';
 import GroupLogo from './GroupLogo';
 import { useState } from 'react';
 import AddGroup from '../pages/AddGroup';
+import { getGroups } from '../utils/helpers';
 
 const Sidebar = () => {
+  const groups = getGroups();
   const [modalShowing, setModalShowing] = useState(false);
   const handleClick = () => {
     setModalShowing((prev) => !prev);
@@ -17,7 +19,7 @@ const Sidebar = () => {
           {groups.map((group) => (
             <li key={group.id} className="grp__item">
               <Link to={`/group/${group.id}`} className="grp__item__link">
-                <GroupLogo name={group.name} />
+                <GroupLogo name={group.name} color={group.color} />
                 <span className="grp__name">{group.name}</span>
               </Link>
             </li>

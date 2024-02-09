@@ -1,4 +1,4 @@
-import { groups, notes } from './data';
+import { notes } from './data';
 import { LS_GROUP_KEY } from './constants';
 /* data rendering helpers */
 export const getGroupInitials = (name) => {
@@ -29,15 +29,18 @@ export const dateTimeFormatter = (timestamp) => {
 /* Data fetching helpers */
 
 /* For groups */
-export const getGroups = () => groups;
+const storageGroups = JSON.parse(localStorage.getItem(LS_GROUP_KEY)) ?? [];
+
+export const getGroups = () => {
+  return storageGroups;
+};
 export const getGroupById = (groupId) => {
-  return groups.find((group) => group.id === parseInt(groupId));
+  return storageGroups.find((group) => group.id === parseInt(groupId));
 };
 
 export const addGroup = (groupObj) => {
-  const storageGroups = JSON.parse(localStorage.getItem(LS_GROUP_KEY)) ?? [];
-
-  storageGroups.push(groupObj);
+  const group = { ...groupObj, id: Date.now() };
+  storageGroups.push(group);
 
   localStorage.setItem(LS_GROUP_KEY, JSON.stringify(storageGroups));
 };

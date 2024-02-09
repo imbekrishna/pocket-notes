@@ -16,10 +16,10 @@ const GroupNotes = () => {
     <section className="notes__container">
       <header className="notes__header">
         <Link to={'..'} className="back__btn">
-          <img role="button" src={arrowBack}/>
+          <img role="button" src={arrowBack} />
         </Link>
         <div className="grp__item__link">
-          <GroupLogo name={group?.name} />
+          <GroupLogo color={group?.color} name={group?.name} />
           <span className="grp__name">{group?.name}</span>
         </div>
       </header>
