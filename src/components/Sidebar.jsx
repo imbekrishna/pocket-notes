@@ -1,10 +1,9 @@
 import { Link, useOutlet } from 'react-router-dom';
-// import { groups } from '../utils/data';
 import GroupLogo from './GroupLogo';
 import { useState } from 'react';
 import AddGroup from '../pages/AddGroup';
 import { getGroups } from '../utils/helpers';
-
+import HomePage from '../pages/HomePage';
 const Sidebar = () => {
   const outlet = useOutlet();
   const groups = getGroups();
@@ -36,7 +35,7 @@ const Sidebar = () => {
             </button>
           </main>
         </div>
-        {outlet}
+        {outlet ? outlet : <HomePage />}
       </div>
       <div
         className={`add_group__container ${modalShowing && 'isVisible'}`}
