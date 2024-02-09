@@ -1,14 +1,28 @@
-import { Route, Routes } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './App.css';
 import GroupNotes from './pages/GroupNotes';
-import HomePage from './pages/HomePage';
+import RootLayout from './components/RootLayout';
+import Sidebar from './components/Sidebar';
+// import HomePage from './pages/HomePage';
 function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/group/:id" element={<GroupNotes />} />
-    </Routes>
-  );
+  const router = createBrowserRouter([
+    {
+      Component: RootLayout,
+      children: [
+        {
+          path: '/',
+          Component: Sidebar,
+          children: [
+            {
+              path: 'group/:id',
+              Component: GroupNotes,
+            },
+          ],
+        },
+      ],
+    },
+  ]);
+  return <RouterProvider router={router} />;
 }
 
 export default App;

@@ -34,13 +34,11 @@ const GroupNotes = () => {
     setNewNote('');
   };
 
-  console.log(allNotes);
-
   // TODO: Can we use useState?
   return (
     <section className="notes__container">
       <header className="notes__header">
-        <Link to={'..'} className="back__btn">
+        <Link to={'..'} className="back__btn show-on-mobile-only">
           <img role="button" src={arrowBack} />
         </Link>
         <div className="grp__item__link">
