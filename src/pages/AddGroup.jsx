@@ -1,15 +1,34 @@
-import { useState } from 'react';
-import { COLOR_MAP } from '../utils/constants';
+import { useState, useRef, useEffect } from 'react';
+import { GROUP_COLORS } from '../utils/constants';
 import { addGroup } from '../utils/helpers';
+const initGroup = {
+  name: '',
+  color: '',
+};
 
 const AddGroup = (props) => {
-  const initGroup = {
-    name: '',
-    color: '',
-  };
-  const [colors, setColors] = useState(COLOR_MAP);
+  const [colors, setColors] = useState(GROUP_COLORS);
   const [group, setGroup] = useState(initGroup);
   const [error, setError] = useState(null);
+  const [selectedColor, setSelectedColor] = useState(null);
+
+  const divRef = useRef();
+
+  useEffect(() => {
+    const clearState = () => {
+      setColors(GROUP_COLORS);
+      setGroup(initGroup);
+      setError(null);
+      setSelectedColor(null);
+    };
+
+    divRef.current.addEventListener('blur', () => {
+      console.log('not hidden');
+      clearState();
+    });
+
+    // return divRef.current.removeEventListener('visibilitychange', clearState);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,11 +39,7 @@ const AddGroup = (props) => {
   const isInvalid = error || group.name.length < 3 || group.color.length <= 0;
 
   const handleSetColor = (color) => {
-    setColors((prevColors) =>
-      prevColors.map((i) =>
-        i.value === color ? { ...i, selected: true } : { ...i, selected: false }
-      )
-    );
+    setSelectedColor(color);
 
     setGroup((prev) => ({ ...prev, color }));
   };
@@ -35,7 +50,7 @@ const AddGroup = (props) => {
     try {
       addGroup(group);
       props.closeModal();
-      setColors(COLOR_MAP);
+      setColors(GROUP_COLORS);
       setGroup(initGroup);
     } catch (error) {
       console.log(error.message);
@@ -43,7 +58,11 @@ const AddGroup = (props) => {
     }
   };
   return (
-    <div className="add_group__card" onClick={(e) => e.stopPropagation()}>
+    <div
+      ref={divRef}
+      className="add_group__card"
+      onClick={(e) => e.stopPropagation()}
+    >
       <h1 className="add_group__header">Create New Group</h1>
       <div className="add_group__edit">
         <span>Group Name</span>
@@ -60,13 +79,15 @@ const AddGroup = (props) => {
         <div className="colors__container">
           {colors.map((color) => (
             <span
-              key={color.value}
-              style={{ backgroundColor: color.value }}
+              key={color}
+              style={{ backgroundColor: color }}
               className="group__color"
-              onClick={() => handleSetColor(color.value)}
+              onClick={() => handleSetColor(color)}
             >
               <span
-                className={`selected_indicator ${color.selected && 'selected'}`}
+                className={`selected_indicator ${
+                  selectedColor === color ? 'selected' : ''
+                }`}
               ></span>
             </span>
           ))}

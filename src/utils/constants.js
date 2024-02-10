@@ -1,7 +1,7 @@
 export const LS_GROUP_KEY = 'pocket_note_groups';
 export const LS_NOTES_KEY = 'pocket_note_notes';
 
-const groupColors = [
+export const GROUP_COLORS = [
   '#B38BFA',
   '#FF79F2',
   '#43E6FC',
@@ -10,7 +10,7 @@ const groupColors = [
   '#6691FF',
 ];
 
-export const COLOR_MAP = groupColors.map((color) => ({
+export const COLOR_MAP = GROUP_COLORS.map((color) => ({
   value: color,
   selected: false,
 }));
