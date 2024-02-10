@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { useOnScreen } from '../hooks/useOnScreen';
 import { GROUP_COLORS } from '../utils/constants';
 import { addGroup } from '../utils/helpers';
 const initGroup = {
@@ -13,6 +14,7 @@ const AddGroup = (props) => {
   const [selectedColor, setSelectedColor] = useState(null);
 
   const divRef = useRef();
+  const onScreen = useOnScreen(divRef);
 
   useEffect(() => {
     const clearState = () => {
@@ -22,13 +24,8 @@ const AddGroup = (props) => {
       setSelectedColor(null);
     };
 
-    divRef.current.addEventListener('blur', () => {
-      console.log('not hidden');
-      clearState();
-    });
-
-    // return divRef.current.removeEventListener('visibilitychange', clearState);
-  }, []);
+    clearState();
+  }, [onScreen]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
