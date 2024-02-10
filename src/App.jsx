@@ -20,10 +20,12 @@ function App() {
     },
   ];
 
+  // To support routing on github pages
   const router =
     import.meta.env.VITE_HASH_ROUTER === 'true'
       ? createHashRouter(routes)
       : createBrowserRouter(routes);
+      
   return <RouterProvider router={router} />;
 }
 
