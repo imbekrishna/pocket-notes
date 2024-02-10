@@ -272,10 +272,6 @@ button {
   transition: all 100ms ease-in-out;
 }
 
-.grp__item:hover {
-  background: rgba(47, 47, 47, 0.17);
-}
-
 .grp__item__link {
   display: flex;
   align-items: center;
@@ -344,6 +340,20 @@ button {
 
   .btn-fab {
     position: absolute;
+    transition: all 100ms;
+  }
+  
+  .btn-fab:hover {
+    transform: scale(1.1);
+  }
+
+  .grp__item-active {
+    /* background: rgba(47, 47, 47, 0.17); */
+    background-color: var(--clr-secondary);
+  }
+
+  .grp__item:hover {
+    background-color: rgba(47, 47, 47, 0.17);
   }
 }
 

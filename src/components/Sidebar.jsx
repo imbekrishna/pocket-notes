@@ -1,4 +1,4 @@
-import { Link, useOutlet } from 'react-router-dom';
+import { Link, useOutlet, useParams } from 'react-router-dom';
 import GroupLogo from './GroupLogo';
 import { useState } from 'react';
 import AddGroup from '../pages/AddGroup';
@@ -6,8 +6,10 @@ import { getGroups } from '../utils/helpers';
 import HomePage from '../pages/HomePage';
 const Sidebar = () => {
   const outlet = useOutlet();
+  const params = useParams();
   const groups = getGroups();
   const [modalShowing, setModalShowing] = useState(false);
+  const [active, setActive] = useState(params.id);
   const handleClick = () => {
     setModalShowing((prev) => !prev);
   };
@@ -21,7 +23,13 @@ const Sidebar = () => {
             <div className="sidebar__grps">
               <ul className="grps__container">
                 {groups.map((group) => (
-                  <li key={group.id} className="grp__item">
+                  <li
+                    key={group.id}
+                    className={`grp__item ${
+                      active && active === group.id ? 'grp__item-active' : ''
+                    }`}
+                    onClick={() => setActive(group.id)}
+                  >
                     <Link to={`/group/${group.id}`} className="grp__item__link">
                       <GroupLogo name={group.name} color={group.color} />
                       <span className="grp__name">{group.name}</span>
