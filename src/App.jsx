@@ -2,8 +2,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './App.css';
 import GroupNotes from './pages/GroupNotes';
 import RootLayout from './components/RootLayout';
-import Sidebar from './components/Sidebar';
-// import HomePage from './pages/HomePage';
+import HomePage from './pages/HomePage';
 function App() {
   const router = createBrowserRouter([
     {
@@ -11,7 +10,7 @@ function App() {
       children: [
         {
           path: '/',
-          Component: Sidebar,
+          Component: HomePage,
           children: [
             {
               path: 'group/:id',

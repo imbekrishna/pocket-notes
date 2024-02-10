@@ -1,22 +1,31 @@
-import welcomeImage from '../assets/welcome-img.png';
-import lockIcon from '../assets/lock.svg';
+import { useOutlet } from 'react-router-dom';
+import { useState } from 'react';
+import AddGroup from './AddGroup';
+import Sidebar from '../components/Sidebar';
+import Welcome from '../components/Welcome';
 
 const HomePage = () => {
+  const outlet = useOutlet();
+  const [modalShowing, setModalShowing] = useState(false);
+  const handleClick = () => {
+    setModalShowing((prev) => !prev);
+  };
+
   return (
-    <div className="welcome__screen hide-on-mobile-only">
-      <div className="welcome__top">
-        <img className="welcome__image" src={welcomeImage} alt="" />
-        <h1>Pocket Notes</h1>
-        <p>
-          Send and receive messages without keeping your phone online. Use
-          Pocket Notes on up to 4 linked devices and 1 mobile phone
-        </p>
+    <>
+      <div className="root__layout">
+        <div className={` ${outlet && 'hide-on-mobile-only'}`}>
+          <Sidebar closeModal={handleClick} />
+        </div>
+        {outlet ? outlet : <Welcome />}
       </div>
-      <p className="welcome__bottom">
-        <img src={lockIcon} alt="" />
-        <span>end-to-end encrypted</span>
-      </p>
-    </div>
+      <div
+        className={`add_group__container ${modalShowing && 'isVisible'}`}
+        onClick={handleClick}
+      >
+        <AddGroup closeModal={handleClick} />
+      </div>
+    </>
   );
 };
 
