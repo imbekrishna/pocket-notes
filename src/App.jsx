@@ -1,9 +1,13 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import {
+  RouterProvider,
+  createBrowserRouter,
+  createHashRouter,
+} from 'react-router-dom';
 import './App.css';
 import GroupNotes from './pages/GroupNotes';
 import HomePage from './pages/HomePage';
 function App() {
-  const router = createBrowserRouter([
+  const routes = [
     {
       path: '/',
       Component: HomePage,
@@ -14,7 +18,12 @@ function App() {
         },
       ],
     },
-  ]);
+  ];
+
+  const router =
+    import.meta.env.VITE_HASH_ROUTER === 'true'
+      ? createHashRouter(routes)
+      : createBrowserRouter(routes);
   return <RouterProvider router={router} />;
 }
 
