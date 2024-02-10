@@ -2,6 +2,8 @@ import { nanoid } from 'nanoid';
 import { LS_GROUP_KEY, LS_NOTES_KEY } from './constants';
 /* data rendering helpers */
 export const getGroupInitials = (name) => {
+  if (name.length < 1) return '';
+
   const wordsArray = name.trim().split(' ');
   const initials =
     wordsArray.length === 1
@@ -40,7 +42,20 @@ export const getGroupById = (groupId) => {
 };
 
 export const addGroup = (groupObj) => {
-  const group = { ...groupObj, id: nanoid(10), createdAt: Date.now() };
+  // const group = { ...groupObj, id: nanoid(10), createdAt: Date.now() };
+
+  // Creates id based on group name to prevent duplication of groups
+  const groupId = groupObj.name.toLowerCase().replace(/\s/gi, '-');
+
+  // Check if group with id exists
+  const groupExists = storedGroups.find((grp) => grp.id === groupId);
+
+  if (groupExists) {
+    throw new Error(`${groupObj.name} already exists.`);
+  }
+
+  const group = { ...groupObj, id: groupId, createdAt: Date.now() };
+
   storedGroups.push(group);
 
   localStorage.setItem(LS_GROUP_KEY, JSON.stringify(storedGroups));

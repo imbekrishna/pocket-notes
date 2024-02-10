@@ -9,13 +9,15 @@ const AddGroup = (props) => {
   };
   const [colors, setColors] = useState(COLOR_MAP);
   const [group, setGroup] = useState(initGroup);
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setGroup((prev) => ({ ...prev, [name]: value }));
+    setError(null);
   };
 
-  const isInvalid = group.name.length < 3 || group.color.length <= 0;
+  const isInvalid = error || group.name.length < 3 || group.color.length <= 0;
 
   const handleSetColor = (color) => {
     setColors((prevColors) =>
@@ -29,10 +31,16 @@ const AddGroup = (props) => {
 
   const handleSubmit = () => {
     if (isInvalid) return;
-    addGroup(group);
-    props.closeModal();
-    setColors(COLOR_MAP);
-    setGroup(initGroup);
+
+    try {
+      addGroup(group);
+      props.closeModal();
+      setColors(COLOR_MAP);
+      setGroup(initGroup);
+    } catch (error) {
+      console.log(error.message);
+      setError(error.message);
+    }
   };
   return (
     <div className="add_group__card" onClick={(e) => e.stopPropagation()}>
@@ -64,6 +72,7 @@ const AddGroup = (props) => {
           ))}
         </div>
       </div>
+      {error && <p className="add_group__error">{error}</p>}
       <button
         disabled={isInvalid}
         onClick={handleSubmit}

@@ -21,8 +21,6 @@ const GroupNotes = () => {
   const [newNote, setNewNote] = useState('');
   const isDisabled = newNote.length <= 0;
 
-  console.log(newNote, newNote.length, isDisabled);
-
   const handleChange = (e) => {
     setNewNote(e.target.value);
   };
