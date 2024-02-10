@@ -17,7 +17,7 @@
   --clr-light: #fff;
   --clr-dark: #0f0f0f;
   --clr-secondary: #dae5f5;
-  --clr-accent: #16008b;
+  --clr-accent: #001f8b;
 
   --fs-h1: 2rem;
   --fs-h2: 1.75rem;
@@ -321,7 +321,7 @@ button {
   color: var(--clr-light);
   font-size: 50px;
   text-align: center;
-  background-color: var(--clr-accent);
+  background-color: #16008b;
 
   border: none;
   border-radius: 50%;
