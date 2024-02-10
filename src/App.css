@@ -90,7 +90,7 @@ button {
   height: 100vh;
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 600px) {
   .root__layout {
     max-height: 100vh;
     height: 100vh;
@@ -153,6 +153,7 @@ button {
   border-radius: 1em;
   text-indent: 0.5em;
   flex: 1;
+  width: 90%;
 }
 
 .add_group__colors {
@@ -328,7 +329,11 @@ button {
   box-shadow: var(--bs);
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 600px) {
+  .sidebar {
+    max-width: 300px;
+  }
+
   .sidebar__header {
     align-self: center;
   }
@@ -342,7 +347,7 @@ button {
     position: absolute;
     transition: all 100ms;
   }
-  
+
   .btn-fab:hover {
     transform: scale(1.1);
   }
@@ -354,6 +359,12 @@ button {
 
   .grp__item:hover {
     background-color: rgba(47, 47, 47, 0.17);
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .sidebar {
+    max-width: 400px;
   }
 }
 
@@ -496,7 +507,7 @@ button {
   display: none;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 600px) {
   .hide-on-mobile-only {
     display: none;
   }
