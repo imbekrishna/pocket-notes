@@ -3,7 +3,7 @@ import { useOnScreen } from '../hooks/useOnScreen';
 import { GROUP_COLORS } from '../utils/constants';
 import { addGroup } from '../utils/helpers';
 import { GroupContext } from '../App';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 const initGroup = {
   name: '',
   color: '',
