@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import GroupLogo from './GroupLogo';
 
 export function GroupItem({ group }) {
-  console.count('rendered');
   return (
     <Link to={`${group.id}`} className="grp__item__link">
       <GroupLogo name={group.name} color={group.color} />

@@ -40,7 +40,7 @@ function App() {
       ? createHashRouter(routes)
       : createBrowserRouter(routes);
 
-  const [groups, setGroups] = useState(getGroups());
+  const [groups, setGroups] = useState(() => getGroups());
 
   return (
     <GroupContext.Provider value={{ groups, setGroups }}>

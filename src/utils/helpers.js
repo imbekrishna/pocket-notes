@@ -3,7 +3,7 @@ import { LS_GROUP_KEY, LS_NOTES_KEY } from './constants';
 
 /* data rendering helpers */
 export const getGroupInitials = (name) => {
-  if (name.length < 1) return '';
+  if (!name || name.length < 1) return '';
 
   const wordsArray = name.trim().split(' ');
   const initials =
@@ -42,7 +42,6 @@ const saveToStorage = (storage_key, value) => {
 };
 
 export const getGroups = () => {
-  console.count('get groups called');
   return storedGroups.sort((a, b) => b.createdAt - a.createdAt);
 };
 export const getGroupById = (groupId) => {
@@ -50,22 +49,16 @@ export const getGroupById = (groupId) => {
 };
 
 export const addGroup = (groupObj) => {
-  // const group = { ...groupObj, id: nanoid(10), createdAt: Date.now() };
-
-  // Creates id based on group name to prevent duplication of groups
-  const groupId = groupObj.name.toLowerCase().replace(/\s/gi, '-');
-
-  // Check if group with id exists
-  const groupExists = storedGroups.find((grp) => grp.id === groupId);
+  // Check if group with name exists
+  const groupExists = storedGroups.find((grp) => grp.name === groupObj.name);
 
   if (groupExists) {
     throw new Error(`${groupObj.name} already exists.`);
   }
 
-  const group = { ...groupObj, id: groupId, createdAt: Date.now() };
+  const group = { ...groupObj, id: nanoid(10), createdAt: Date.now() };
 
   storedGroups.push(group);
-
   saveToStorage(LS_GROUP_KEY, storedGroups);
 
   return getGroups();
