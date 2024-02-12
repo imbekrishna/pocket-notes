@@ -1,7 +1,7 @@
-import { Link, useParams } from 'react-router-dom';
-import GroupLogo from './GroupLogo';
+import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { getGroups, deleteGroupById } from '../utils/helpers';
+import GroupItem from './GroupItem';
 
 const Sidebar = (props) => {
   const params = useParams();
@@ -22,10 +22,7 @@ const Sidebar = (props) => {
               onClick={() => setActive(group.id)}
               onDoubleClick={() => deleteGroupById(group.id)}
             >
-              <Link to={`${group.id}`} className="grp__item__link">
-                <GroupLogo name={group.name} color={group.color} />
-                <span className="grp__name">{group.name}</span>
-              </Link>
+              <GroupItem group={group} />
             </li>
           ))}
         </ul>
