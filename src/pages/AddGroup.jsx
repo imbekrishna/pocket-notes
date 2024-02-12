@@ -3,6 +3,7 @@ import { useOnScreen } from '../hooks/useOnScreen';
 import { GROUP_COLORS } from '../utils/constants';
 import { addGroup } from '../utils/helpers';
 import { GroupContext } from '../App';
+import { redirect, useNavigate } from 'react-router-dom';
 const initGroup = {
   name: '',
   color: '',
@@ -14,6 +15,7 @@ const AddGroup = (props) => {
   const [error, setError] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
   const { setGroups } = useContext(GroupContext);
+  const navigate = useNavigate();
 
   const divRef = useRef();
   const inputRef = useRef();
@@ -52,6 +54,7 @@ const AddGroup = (props) => {
     try {
       const newGroups = addGroup(group);
       setGroups(newGroups);
+      navigate(newGroups[0].id, { replace: true });
       props.closeModal();
       setColors(GROUP_COLORS);
       setGroup(initGroup);

@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { deleteGroupById } from '../utils/helpers';
 import GroupItem from './GroupItem';
 import { GroupContext } from '../App';
@@ -7,6 +7,10 @@ import { GroupContext } from '../App';
 const Sidebar = (props) => {
   const params = useParams();
   const [active, setActive] = useState(params.id);
+
+  useEffect(() => {
+    setActive(params.id);
+  }, [params.id]);
 
   const { groups } = useContext(GroupContext);
 
