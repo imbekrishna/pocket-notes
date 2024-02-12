@@ -16,6 +16,7 @@ const AddGroup = (props) => {
   const { setGroups } = useContext(GroupContext);
 
   const divRef = useRef();
+  const inputRef = useRef();
   const onScreen = useOnScreen(divRef);
 
   useEffect(() => {
@@ -27,6 +28,8 @@ const AddGroup = (props) => {
     };
 
     clearState();
+
+    inputRef?.current.focus();
   }, [onScreen]);
 
   const handleChange = (e) => {
@@ -67,6 +70,7 @@ const AddGroup = (props) => {
       <div className="add_group__edit">
         <span>Group Name</span>
         <input
+          ref={inputRef}
           type="text"
           placeholder="Enter group name"
           name="name"
