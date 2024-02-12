@@ -16,6 +16,7 @@ import {
 const GroupNotes = () => {
   const params = useParams();
   const group = getGroupById(params.id);
+
   const allNotes = getNotesByGroupId(params.id);
 
   const [newNote, setNewNote] = useState('');
@@ -32,7 +33,6 @@ const GroupNotes = () => {
     setNewNote('');
   };
 
-  // TODO: Can we use useState?
   return (
     <section className="notes__container">
       <header className="notes__header">
@@ -46,7 +46,7 @@ const GroupNotes = () => {
       </header>
       <ul className="notes__list">
         {allNotes.map((note) => (
-          <NoteCard key={note.id} {...note} />
+          <NoteCard key={note.id} groupId={group.id} {...note} />
         ))}
       </ul>
       <footer className="note__editor">

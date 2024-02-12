@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid';
 import { LS_GROUP_KEY, LS_NOTES_KEY } from './constants';
+
 /* data rendering helpers */
 export const getGroupInitials = (name) => {
   if (name.length < 1) return '';
@@ -18,7 +19,9 @@ export const dateTimeFormatter = (timestamp) => {
     year: 'numeric',
     month: 'short',
     day: '2-digit',
-  }).format(new Date(timestamp));
+  })
+    .format(new Date(timestamp))
+    .replace(/-/gi, ' ');
 
   const time = new Intl.DateTimeFormat('en-IN', {
     hour: '2-digit',
@@ -33,6 +36,10 @@ export const dateTimeFormatter = (timestamp) => {
 /* For groups */
 const storedGroups = JSON.parse(localStorage.getItem(LS_GROUP_KEY)) ?? [];
 const storedNotes = JSON.parse(localStorage.getItem(LS_NOTES_KEY)) ?? {};
+
+const saveToStorage = (storage_key, value) => {
+  localStorage.setItem(storage_key, JSON.stringify(value));
+};
 
 export const getGroups = () => {
   return storedGroups.sort((a, b) => b.createdAt - a.createdAt);
@@ -58,18 +65,29 @@ export const addGroup = (groupObj) => {
 
   storedGroups.push(group);
 
-  localStorage.setItem(LS_GROUP_KEY, JSON.stringify(storedGroups));
+  saveToStorage(LS_GROUP_KEY, storedGroups);
+};
+
+export const deleteGroupById = (groupId) => {
+  const groupIndex = storedGroups.findIndex((group) => group.id === groupId);
+  if (groupIndex < 0) {
+    return;
+  }
+
+  storedGroups.splice(groupIndex, 1);
+  saveToStorage(LS_GROUP_KEY, storedGroups);
 };
 
 /* For notes */
 export const getNotes = () => storedNotes;
+
 export const getNotesByGroupId = (groupId) => {
   return storedNotes[groupId]?.sort((a, b) => b.createdAt - a.createdAt) ?? [];
 };
-// TODO: Implement
-// export const getNoteById = (noteId) => {
-//   return notes.find((note) => note.id === noteId);
-// };
+
+export const getNoteById = (noteId) => {
+  return storedNotes.find((note) => note.id === noteId);
+};
 
 export const addNoteToGroup = (groupId, note) => {
   const noteObj = { id: nanoid(10), note, createdAt: Date.now() };
@@ -78,6 +96,24 @@ export const addNoteToGroup = (groupId, note) => {
   } else {
     storedNotes[groupId] = [noteObj];
   }
-  // storedNotes[groupId].push(note);
-  localStorage.setItem(LS_NOTES_KEY, JSON.stringify(storedNotes));
+
+  saveToStorage(LS_NOTES_KEY, storedNotes);
+};
+
+export const deleteNoteFromGroup = (groupId, noteId) => {
+  const groupExists = Object.prototype.hasOwnProperty.call(
+    storedNotes,
+    groupId
+  );
+
+  if (!groupExists) return;
+
+  const notesGroup = storedNotes[groupId];
+  const noteIndex = notesGroup.findIndex((note) => note.id === noteId);
+
+  if (noteIndex < 0) return;
+
+  notesGroup.splice(noteIndex, 1);
+
+  saveToStorage(LS_NOTES_KEY, storedNotes);
 };

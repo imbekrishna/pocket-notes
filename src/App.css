@@ -6,7 +6,7 @@
   margin: 0;
 }
 
-/* Customer properties */
+/* #region Customer properties */
 
 :root {
   --ff-primary: 'Roboto', sans-serif;
@@ -36,6 +36,8 @@
     --fs-body: 1.125rem;
   }
 }
+
+/* #endregion */
 
 /* General styles */
 
@@ -99,7 +101,7 @@ button {
   }
 }
 
-/* Add card styles */
+/* #region Add card styles */
 
 .add_group__container {
   bottom: -200%;
@@ -209,6 +211,8 @@ button {
   font-size: var(--fs-h3);
 }
 
+/* #endregion */
+
 @media screen and (min-width: 800px) {
   .add_group__card {
     max-width: 700px;
@@ -237,7 +241,7 @@ button {
   }
 }
 
-/* Sidebar styles */
+/* #region Sidebar styles */
 
 .sidebar {
   position: relative;
@@ -329,6 +333,8 @@ button {
   box-shadow: var(--bs);
 }
 
+/* #endregion */
+
 @media screen and (min-width: 600px) {
   .sidebar {
     max-width: 300px;
@@ -368,7 +374,8 @@ button {
   }
 }
 
-/* Group notes styles */
+/* #region Group notes styles */
+
 .notes__container {
   height: 100vh;
   flex: 2;
@@ -427,6 +434,9 @@ button {
   column-gap: 0.5em;
   justify-content: flex-end;
   margin-top: 0.5em;
+}
+
+.note__item__meta :last-child {
   text-transform: uppercase;
 }
 
@@ -463,6 +473,9 @@ button {
   transform: scale(1.2);
 }
 
+/* #endregion Group note styles */
+
+/* #region Welcome screen */
 .welcome__screen {
   background-color: var(--clr-secondary);
   max-height: 100vh;
@@ -497,6 +510,8 @@ button {
   column-gap: 0.5em;
   align-items: center;
 }
+
+/* #endregion welcome screen */
 
 /* Sidebar responsiveness */
 .hide-on-mobile-only {

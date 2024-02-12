@@ -1,4 +1,5 @@
 import {
+  Navigate,
   RouterProvider,
   createBrowserRouter,
   createHashRouter,
@@ -6,6 +7,11 @@ import {
 import './App.css';
 import GroupNotes from './pages/GroupNotes';
 import HomePage from './pages/HomePage';
+
+function NoRouteHere() {
+  return <Navigate to="/" replace={true} />;
+}
+
 function App() {
   const routes = [
     {
@@ -13,10 +19,14 @@ function App() {
       Component: HomePage,
       children: [
         {
-          path: 'group/:id',
+          path: ':id',
           Component: GroupNotes,
         },
       ],
+    },
+    {
+      path: '*',
+      Component: NoRouteHere,
     },
   ];
 
@@ -25,7 +35,7 @@ function App() {
     import.meta.env.VITE_HASH_ROUTER === 'true'
       ? createHashRouter(routes)
       : createBrowserRouter(routes);
-      
+
   return <RouterProvider router={router} />;
 }
 
