@@ -1,7 +1,8 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import { useOnScreen } from '../hooks/useOnScreen';
 import { GROUP_COLORS } from '../utils/constants';
 import { addGroup } from '../utils/helpers';
+import { GroupContext } from '../App';
 const initGroup = {
   name: '',
   color: '',
@@ -12,6 +13,7 @@ const AddGroup = (props) => {
   const [group, setGroup] = useState(initGroup);
   const [error, setError] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
+  const { setGroups } = useContext(GroupContext);
 
   const divRef = useRef();
   const onScreen = useOnScreen(divRef);
@@ -45,7 +47,8 @@ const AddGroup = (props) => {
     if (isInvalid) return;
 
     try {
-      addGroup(group);
+      const newGroups = addGroup(group);
+      setGroups(newGroups);
       props.closeModal();
       setColors(GROUP_COLORS);
       setGroup(initGroup);

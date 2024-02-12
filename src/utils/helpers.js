@@ -42,6 +42,7 @@ const saveToStorage = (storage_key, value) => {
 };
 
 export const getGroups = () => {
+  console.count('get groups called');
   return storedGroups.sort((a, b) => b.createdAt - a.createdAt);
 };
 export const getGroupById = (groupId) => {
@@ -66,6 +67,8 @@ export const addGroup = (groupObj) => {
   storedGroups.push(group);
 
   saveToStorage(LS_GROUP_KEY, storedGroups);
+
+  return getGroups();
 };
 
 export const deleteGroupById = (groupId) => {

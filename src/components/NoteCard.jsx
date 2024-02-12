@@ -4,7 +4,6 @@ import { deleteNoteFromGroup } from '../utils/helpers';
 import React from 'react';
 
 const NoteCard = (props) => {
-  console.count('Notes rendered');
   const { date, time } = dateTimeFormatter(props?.createdAt ?? new Date());
   const handleDelete = () => {
     deleteNoteFromGroup(props.groupId, props.id);
@@ -20,5 +19,5 @@ const NoteCard = (props) => {
     </li>
   );
 };
-const MemoizedNoteCard = React.memo(NoteCard)
+const MemoizedNoteCard = React.memo(NoteCard);
 export default MemoizedNoteCard;

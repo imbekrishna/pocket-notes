@@ -7,6 +7,10 @@ import {
 import './App.css';
 import GroupNotes from './pages/GroupNotes';
 import HomePage from './pages/HomePage';
+import { getGroups } from './utils/helpers';
+import React, { useState } from 'react';
+
+export const GroupContext = React.createContext();
 
 function NoRouteHere() {
   return <Navigate to="/" replace={true} />;
@@ -36,7 +40,13 @@ function App() {
       ? createHashRouter(routes)
       : createBrowserRouter(routes);
 
-  return <RouterProvider router={router} />;
+  const [groups, setGroups] = useState(getGroups());
+
+  return (
+    <GroupContext.Provider value={{ groups, setGroups }}>
+      <RouterProvider router={router} />
+    </GroupContext.Provider>
+  );
 }
 
 export default App;
