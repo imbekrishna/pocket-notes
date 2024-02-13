@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { deleteGroupById } from '../utils/helpers';
 import GroupItem from './GroupItem';
@@ -6,6 +6,7 @@ import { GroupContext } from '../App';
 
 const Sidebar = (props) => {
   const params = useParams();
+  const navigate = useNavigate();
   const [active, setActive] = useState(params.id);
 
   useEffect(() => {
@@ -26,7 +27,10 @@ const Sidebar = (props) => {
                 active && active === group.id ? 'grp__item-active' : ''
               }`}
               onClick={() => setActive(group.id)}
-              onDoubleClick={() => deleteGroupById(group.id)}
+              onDoubleClick={() => {
+                deleteGroupById(group.id);
+                navigate('/');
+              }}
             >
               <GroupItem group={group} />
             </li>

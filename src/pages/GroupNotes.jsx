@@ -61,8 +61,9 @@ const GroupNotes = () => {
           onClick={saveNote}
           className="note__add__btn"
           disabled={isDisabled}
+          aria-label="Add Note"
         >
-          <img src={sendIcon} role="button" width="25" height="25" />
+          <img src={sendIcon} width="25" height="25" alt='' />
         </button>
       </footer>
     </section>

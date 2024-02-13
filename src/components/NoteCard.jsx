@@ -13,7 +13,7 @@ const NoteCard = (props) => {
       <p>{props.note}</p>
       <p className="note__item__meta">
         <span>{date}</span>
-        <img src={separator} className="date__separator" />
+        <img src={separator} className="date__separator" alt=''/>
         <span>{time}</span>
       </p>
     </li>
