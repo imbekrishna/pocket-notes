@@ -19,7 +19,7 @@ const HomePage = () => {
         </p>
       </div>
       <p className="welcome__bottom">
-        <img src={lockIcon} alt="" hidden="10" width="10" />
+        <img src={lockIcon} alt="" height="20" width="20" />
         <span>end-to-end encrypted</span>
       </p>
     </>
