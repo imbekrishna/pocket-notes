@@ -331,8 +331,7 @@ button {
 
 @media screen and (min-width: 600px) {
   .sidebar {
-    min-width: 300px;
-    max-width: 400px;
+    width: 350px;
   }
 
   .sidebar__header {

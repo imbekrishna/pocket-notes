@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { deleteGroupById } from '../utils/helpers';
 import GroupItem from './GroupItem';
@@ -17,7 +17,9 @@ const Sidebar = (props) => {
 
   return (
     <main className="sidebar">
-      <h1 className="sidebar__header">Pocket Notes</h1>
+      <h1 className="sidebar__header">
+        <Link to="/">Pocket Notes</Link>
+      </h1>
       <div className="sidebar__grps">
         <ul className="grps__container">
           {groups.map((group) => (
